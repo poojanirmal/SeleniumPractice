@@ -21,9 +21,9 @@ WebDriver driver;
 	@Before
 	public void setUp()
 	{
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\LENOVO\\eclipse-workspace\\SeleniumPractices\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\msnir\\eclipse-workspace\\SeleniumPractice\\chromedriver.exe");
 		ChromeOptions opt = new ChromeOptions();
-		opt.setBinary("C:\\Users\\LENOVO\\eclipse-workspace\\chrome-win64\\chrome-win64\\chrome.exe");
+		opt.setBinary("C:\\Users\\msnir\\eclipse-workspace\\chrome-win64\\chrome-win64\\chrome.exe");
 		driver = new ChromeDriver(opt);
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
