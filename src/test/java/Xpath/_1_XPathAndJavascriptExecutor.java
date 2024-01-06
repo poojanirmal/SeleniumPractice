@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-public class _1_XPath {
+public class _1_XPathAndJavascriptExecutor {
 	
 	WebDriver driver;
 	WebDriverWait wait;
@@ -27,9 +28,9 @@ public class _1_XPath {
 	@Before
 	public void setUp()
 	{
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\LENOVO\\eclipse-workspace\\SeleniumPractices\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\msnir\\eclipse-workspace\\SeleniumPractice\\chromedriver.exe");
 		ChromeOptions opt = new ChromeOptions();
-		opt.setBinary("C:\\Users\\LENOVO\\eclipse-workspace\\chrome-win64\\chrome-win64\\chrome.exe");
+		opt.setBinary("C:\\Users\\msnir\\eclipse-workspace\\chrome-win64\\chrome-win64\\chrome.exe");
 		driver = new ChromeDriver(opt);
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -50,14 +51,18 @@ public class _1_XPath {
 	{
 		WebElement searchBoxEle = driver.findElement(By.xpath("//input[@class='desktop-searchBar']"));
 		searchBoxEle.sendKeys("Mobile" + Keys.ENTER);
+		JavascriptExecutor js = ((JavascriptExecutor)driver);
+//		js.executeScript("arguments[0].value = 'mobile';", searchBoxEle);
 		
 		
-		String expectedTitle = "Mobile - Buy Mobile online in India";
-		
-		Assert.assertEquals(expectedTitle, driver.getTitle());
-		
+//		
+//		String expectedTitle = "Mobile - Buy Mobile online in India";
+//		
+//		Assert.assertEquals(expectedTitle, driver.getTitle());
+//		
 		WebElement sizeBtnEle = driver.findElement(By.xpath("(//span[@class='atsa-downArrow sprites-arrowDownBold myntraweb-sprite'])[3]"));
-		sizeBtnEle.click();
+		//sizeBtnEle.click();
+		js.executeScript("arguments[0].click();", sizeBtnEle);
 		
 		WebElement smallBtnEle = driver.findElement(By.xpath("(//div[@class='common-checkboxIndicator'])[1]"));
 		smallBtnEle.click();

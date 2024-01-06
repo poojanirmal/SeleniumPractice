@@ -22,9 +22,9 @@ public class DropDown {
 	@Before
 	public void setUp()
 	{
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\LENOVO\\eclipse-workspace\\SeleniumPractices\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\msnir\\eclipse-workspace\\SeleniumPractice\\chromedriver.exe");
 		ChromeOptions opt = new ChromeOptions();
-		opt.setBinary("C:\\Users\\LENOVO\\eclipse-workspace\\chrome-win64\\chrome-win64\\chrome.exe");
+		opt.setBinary("C:\\Users\\msnir\\eclipse-workspace\\chrome-win64\\chrome-win64\\chrome.exe");
 		driver = new ChromeDriver(opt);
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -38,7 +38,7 @@ public class DropDown {
 		driver.quit();
 	}
 	
-	@Ignore
+	
 	@Test
 	public void dropDownPractice_1()
 	{
@@ -59,7 +59,9 @@ public class DropDown {
 		
 		WebElement countrySelectEle = driver.findElement(By.xpath("//select"));
 		 Select sl = new Select(countrySelectEle);
+		 sl.selectByIndex(0);
 		 sl.selectByValue("AFG");
+		 sl.selectByVisibleText("Afghanistan");
 	}
 	
 	

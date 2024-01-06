@@ -7,31 +7,32 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 
-public class IFrame_Handling {
+public class IFrame_HandlingClickByUsingJavascript {
 
 	WebDriver driver;
 	
 	@Before
 	public void setUp()
 	{
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\LENOVO\\eclipse-workspace\\SeleniumPractices\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\msnir\\eclipse-workspace\\SeleniumPractice\\chromedriver.exe");
 		ChromeOptions opt = new ChromeOptions();
 
-		opt.setBinary("C:\\Users\\LENOVO\\eclipse-workspace\\chrome-win64\\chrome-win64\\chrome.exe");
-		opt.addExtensions(new File("C:\\Users\\LENOVO\\eclipse-workspace\\SeleniumPractices\\extension_5_9_0_0.crx"));
+		opt.setBinary("C:\\Users\\msnir\\eclipse-workspace\\chrome-win64\\chrome-win64\\chrome.exe");
+		//opt.addExtensions(new File("C:\\Users\\LENOVO\\eclipse-workspace\\SeleniumPractices\\extension_5_9_0_0.crx"));
 		//opt.addArguments("--incognito");
 		
 		driver = new ChromeDriver(opt);
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		driver.get("https://demo.automationtesting.in/");
+		driver.get("https://demo.automationtesting.in/Frames.html");
 	}
 
 	@After
@@ -52,16 +53,17 @@ public class IFrame_Handling {
 		switchToEle.click();
 		
 		WebElement framesBtnEle = driver.findElement(By.xpath("//a[text()='Frames']"));
-		framesBtnEle.click();
+		//framesBtnEle.click();
+		JavascriptExecutor js = ((JavascriptExecutor)driver);
+		js.executeScript("arguments[0].click();", framesBtnEle);
 		
-//		WebElement secondIFrameEle = driver.findElement(By.xpath("//a[text()='Iframe with in an Iframe']"));
-//		secondIFrameEle.click();
-//		
-//		WebElement iframeEle = driver.findElement(By.xpath("//div[@id='Multiple']/iframe"));
-//		driver.switchTo().frame(iframeEle);
-//		
-//		WebElement textBoxEle = driver.findElement(By.xpath("//(//input[@type='text'])[1]"));
-//		textBoxEle.sendKeys("Pooja");
+		
+		WebElement iframeEle = driver.findElement(By.xpath("//iframe[@id='singleframe']"));
+		driver.switchTo().frame(iframeEle);
+		
+		WebElement textBoxEle = driver.findElement(By.xpath("//input[@type='text']"));
+		textBoxEle.sendKeys("Pooja");
+	
 	}
 	
 	//button[text()='Skip Sign In']
